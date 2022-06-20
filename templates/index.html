@@ -1,0 +1,196 @@
+{% extends 'base.html' %} {% block title %}CRUD Using Flask {% endblock %} {%
+include 'header.html' %} {% block body %}
+<div class="container">
+  <div class="row bg-light">
+    <div class="col md-12">
+      <div class="jumbotron p-3">
+        <h2>
+          Manage <b>Employees</b>
+          <button
+            type="button"
+            class="btn btn-success float-end"
+            data-bs-toggle="modal"
+            data-bs-target="#myModal"
+          >
+            Add New Employees
+          </button>
+        </h2>
+
+        <!-- success message -->
+        {% with messages = get_flashed_messages() %}
+
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-success" role="alert">
+      {{message}}
+    </div>    
+      
+            {% endfor %}
+        {% endif %}
+
+        {% endwith %}
+
+        <table class="table table-hover table-dark">
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Action</th>
+          </tr>
+          <tr>
+            <td>01</td>
+            <td>Rohit</td>
+            <td>rohit@gmail.com</td>
+            <td>6290627369</td>
+            <td>
+              <a
+                href="#"
+                class="btn btn-warning btn-xs"
+                data-bs-toggle="modal"
+                data-bs-target="#modalEdit"
+              >
+                Edit
+              </a>
+              <a
+                href="#"
+                class="btn btn-danger btn-xs"
+                onclick="return confirm('Are you sure to delete ? ')"
+              >
+                Delete
+              </a>
+            </td>
+          </tr>
+
+          <div
+        class="modal fade"
+        id="modalEdit"
+        tabindex="-1"
+        aria-labelledby="modalEditLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">
+                Edit Employees
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="hidden" name="id" value="id" />
+                  <input type="text" class="form-control" id="name" value="Rohit" required />
+                </div>
+                <div class="mb-3">
+                  <label for="Email" class="form-label">Email</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    value="rohit@gmail.com"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="phone" class="form-label">Phone</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="phone"
+                    value="6290627369"
+                    required
+                  />
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Edit
+              </button>
+              <button type="submit" class="btn btn-primary">Add</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+        </table>
+      </div>
+
+      <!-- modal -->
+
+      <div
+        class="modal fade"
+        id="myModal"
+        tabindex="-1"
+        aria-labelledby="myModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">
+                Add New Employees
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <form action="{{url_for('insert')}}" method="POST">
+                <div class="mb-3">
+                  <label for="name" class="form-label">Name</label>
+                  <input type="text" class="form-control" id="name" name="name" required >
+                </div>
+                <div class="mb-3">
+                  <label for="Email" class="form-label">Email</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    name="email"
+                    required
+                  >
+                </div>
+                <div class="mb-3">
+                  <label for="phone" class="form-label">Phone</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="phone"
+                    name="phone"
+                    required
+                  >
+                </div>
+                <button type="submit" class="btn btn-primary">Add</button>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
